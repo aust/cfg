@@ -1,54 +1,54 @@
-set nocompatible              " required
-filetype off                  " required
-
 set encoding=utf-8
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+if (has("termguicolors"))
+  set termguicolors
+endif
 
-" let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
+call plug#begin('~/.vim/plugged')
 
-" *** Plugins begin
+" *** Plugs begin
 
 " Code folding
-Plugin 'tmhedberg/SimpylFold'
+Plug 'tmhedberg/SimpylFold'
 
 " Python indentation
-Plugin 'vim-scripts/indentpython.vim'
+Plug 'vim-scripts/indentpython.vim'
 
 " Auto complete
-Bundle 'Valloric/YouCompleteMe'
+Plug 'ycm-core/YouCompleteMe'
 
 " Syntax checking on each save
-Plugin 'vim-syntastic/syntastic'
+Plug 'vim-syntastic/syntastic'
 
 " PEP8 checking
-Plugin 'nvie/vim-flake8'
+Plug 'nvie/vim-flake8'
 
 " Use Zenburn color scheme (terminal mode)
-Plugin 'jnurmine/Zenburn'
+Plug 'jnurmine/Zenburn'
 
 " File tree
-Plugin 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree'
 
 " Use tabs with NERDTree
-Plugin 'jistr/vim-nerdtree-tabs'
+Plug 'jistr/vim-nerdtree-tabs'
 
 " Git integration
-Plugin 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'
 
 " Powerline
-Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+Plug 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 
-" *** Plugins end
+" *** Plugs end
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
+" All of your Plugs must be added before the following line
+call plug#end()            " required
+
 filetype plugin indent on    " required
 
 " SimpylFold Configuration
@@ -86,12 +86,12 @@ nnoremap <space> za
 
 " Proper configuration for Python
 au BufNewFile,BufRead *.py
-    \ set tabstop=4
-    \ set softtabstop=4
-    \ set shiftwidth=4
-    \ set textwidth=79
-    \ set expandtab
-    \ set autoindent
+    \ set tabstop=4 |
+    \ set softtabstop=4 |
+    \ set shiftwidth=4 |
+    \ set textwidth=79 |
+    \ set expandtab |
+    \ set autoindent |
     \ set fileformat=unix
 
 au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
@@ -107,10 +107,13 @@ if 'VIRTUAL_ENV' in os.environ:
 EOF
 
 " Full stack settings
-au BufNewFile,BufRead *.js, *.html, *.css
-    \ set tabstop=2
-    \ set softtabstop=2
-    \ set shiftwidth=2
+au BufNewFile,BufRead *.js,*.jsx,*.yml,*.ts,*.tsx,*.json,*.html,*.css
+    \ set tabstop=2 |
+    \ set softtabstop=2 |
+    \ set shiftwidth=2 |
+    \ set expandtab |
+    \ set autoindent |
+    \ set fileformat=unix
 
 " Turn highlighting on
 let python_highlight_all=1
