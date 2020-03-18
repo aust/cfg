@@ -127,3 +127,11 @@ set nu
 " Enable macOS clipboard
 set clipboard=unnamed
 
+" SNIPPETS:
+
+" React Component:
+nnoremap ,rc :-read $HOME/.vim/skeletons/react/component.tsx<CR>/return<CR>f;
+
+" React Component Stateful:
+nnoremap ,rcs :-read $HOME/.vim/skeletons/react/stateful-component.tsx<CR>/return<CR>f;
+
